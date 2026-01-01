@@ -40,6 +40,11 @@ receiver_init_commands:
 # Reset logging
 
 - "UNLOGALL THISPORT"
+- "SETINSTRANSLATION ANT1 -1.26 -0.30 1.77 0.05 0.05 0.05 VEHICLE\r\n"
+- "SETINSTRANSLATION ANT2 -1.26 1.12 1.77 0.05 0.05 0.05 VEHICLE\r\n"
+- "SETINSTRANSLATION USER 0.07 -1.12 -0.40 0.02 0.05 0.02 VEHICLE\r\n"
+#- If connecting with external IMU, use CONNECTIMU command:
+#- "CONNECTIMU IMUPort IMUType"
 #- "FRESET"
 #- "!PAUSE 10"
 
@@ -61,6 +66,16 @@ receiver_init_commands:
 
 #- ... etc.
 
+#-------------------------------------------------------------------------------------------------------
+# PTP Configuration
+#-------------------------------------------------------------------------------------------------------
+- "ETHCONFIG ETHA AUTO AUTO AUTO AUTO"
+- "ICOMCONFIG ICOM1 TCP :2000"
+- "IPCONFIG ETHA STATIC 192.168.200.9 255.255.255.0 192.168.200.1"
+- "SAVEETHERNETDATA"
+- "PTPMODE ENABLE"
+- "PTPPROFILE PTP_ETH"
+- "PTPTIMESCALE PTP_TIME"
 
 #-------------------------------------------------------------------------------------------------------
 # Standard Logging Requests
@@ -68,35 +83,35 @@ receiver_init_commands:
 #----------------------------
 # Status & Config
 - "LOG INSCONFIGB ONCE"  # Log once to obtain initial configuration. Do not remove, needed for IMU messages.
-- "LOG TERRASTARINFOB ONCE"
-- "LOG TERRASTARSTATUSB ONCE"
+- "LOG INSCONFIGB ONTIME 300" # Periodic update.
 - "LOG TERRASTARINFOB ONTIME 300" # Periodic update.
-- "LOG TERRASTARSTATUSB ONTIME 300"
-- "LOG INSCONFIGB ONTIME 300" 
+- "LOG TERRASTARSTATUSB ONTIME 300" # Periodic update.
 - "LOG RXSTATUSB ONCHANGED"
+- "LOG IPCONFIG ONCE"
+- "LOG PTPDELTATIMEA ONTIME 10"
+- "LOG TIME ONTIME 10"
 
 # GNSS and INS Solutions
 
 # Do not remove these messages -------------------------------------------------------------------------- 
 - "LOG BESTPOSB ONTIME 0.1" 
 - "LOG BESTVELB ONTIME 0.1" 
-- "LOG BESTGNSSVELB ONTIME 0.1"
 - "LOG BESTUTMB ONTIME 1"
-- "LOG BESTGNSSPOSB ONTIME 0.1"
 - "LOG PPPPOSB ONTIME 1"
 - "LOG HEADING2B ONNEW"
 - "LOG PSRDOP2B ONCHANGED"
 - "LOG INSPVASB ONTIME 0.02"
 - "LOG INSPVAXB ONTIME 1"
-- "LOG CORRIMUSB ONTIME 0.01"
+- "LOG CORRIMUSB ONTIME 0.01" # Change logging rate according to IMU rate required
 - "LOG INSSTDEVB ONTIME 1"
+- "LOG BESTGNSSPOSB ONTIME 0.1"
 - "LOG RAWIMUSXB ONNEW"
+
 #----------------------------------------------------------------------------------------------------------
 
 - "LOG TIMEB ONTIME 1" # Can be used as a 'heartbeat' message.
 
 # Post-Processing Messages; not directly used to generate ROS messages.
-- "LOG VERSIONB ONCE"
 - "LOG INSUPDATESTATUSB ONNEW"
 - "LOG RAWEPHEMB ONNEW"
 - "LOG GLOEPHEMERISB ONNEW"
@@ -104,10 +119,3 @@ receiver_init_commands:
 - "LOG GALFNAVEPHEMERISB ONNEW"
 - "LOG GALINAVEPHEMERISB ONNEW"
 - "LOG RANGEB ONTIME 1"
-# - "LOG RANGEB_1 ONTIME 1" # It is recommended to include this log if you are using a dual antenna setup
-
-
-
-
-
-
