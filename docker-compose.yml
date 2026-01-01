@@ -1,8 +1,19 @@
 services:
-  ros2_novatel_driver:
-    image: ros2_novatel_driver
+  novatel:
+    image: ros2-novatel-driver
     build:
       context: .
       dockerfile: docker/Dockerfile.build
-    network_mode: host
     entrypoint: "sleep infinity"
+    network_mode: host
+    privileged: true
+    devices:
+      - /dev/ttyUSB0
+      - /dev/ttyUSB1
+      - /dev/ttyUSB2
+    volumes:
+      - /dev:/dev
+      - /lib/firmware:/lib/firmware
+    # command: >
+    #   oem7_file_name:=/dev/ttyUSB0 
+    #   oem7_tty_baud:=115200
