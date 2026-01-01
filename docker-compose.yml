@@ -11,6 +11,7 @@ services:
       - /dev/ttyUSB0
       - /dev/ttyUSB1
       - /dev/ttyUSB2
+      - /tmp/.X11-unix:/tmp/.X11-unix
     volumes:
       - /dev:/dev
       - /lib/firmware:/lib/firmware
