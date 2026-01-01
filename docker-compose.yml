@@ -1,0 +1,8 @@
+services:
+  ros2_novatel_driver:
+    image: ros2_novatel_driver
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.build
+    network_mode: host
+    entrypoint: "sleep infinity"
