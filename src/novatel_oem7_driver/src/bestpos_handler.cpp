@@ -815,25 +815,25 @@ namespace novatel_oem7_driver
         }
       }
 
-      if(msg->getMessageId() == BESTGNSSVEL_OEM7_MSGID)
-      {
-        publishBESTGNSSVEL(msg);
-      }
+      // if(msg->getMessageId() == BESTGNSSVEL_OEM7_MSGID)
+      // {
+      //   publishBESTGNSSVEL(msg);
+      // }
 
       if(msg->getMessageId() == BESTUTM_OEM7_MSGID)
       {
         publishBESTUTM(msg);
       }
 
-      if(msg->getMessageId() == BESTGNSSPOS_OEM7_MSGID)
-      {
-        publishBESTGNSSPOS(msg);
-      }
+      // if(msg->getMessageId() == BESTGNSSPOS_OEM7_MSGID)
+      // {
+      //   publishBESTGNSSPOS(msg);
+      // }
 
-      if(msg->getMessageId() == PPPPOS_OEM7_MSGID)
-      {
-        publishPPPPOS(msg);
-      }
+      // if(msg->getMessageId() == PPPPOS_OEM7_MSGID)
+      // {
+      //   publishPPPPOS(msg);
+      // }
 
       if(msg->getMessageId() == INSPVAS_OEM7_MSGID)
       {
