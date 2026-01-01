@@ -3,7 +3,9 @@ ARG ROS_ARCH=amd64
 
 FROM ${ROS_ARCH}/ros:${ROS_DISTRO}
 
-RUN apt-get update && apt-get install -y sudo vim nano curl socat python3-pip python3-bloom python3-nose python3-rosdoc2
+RUN apt-get update && apt-get install -y sudo vim nano curl \
+    socat python3-pip python3-bloom python3-nose python3-rosdoc2 \
+    xterm gdb
 
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
