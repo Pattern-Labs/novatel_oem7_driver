@@ -11,10 +11,10 @@ services:
       - /dev/ttyUSB0
       - /dev/ttyUSB1
       - /dev/ttyUSB2
-      - /tmp/.X11-unix:/tmp/.X11-unix
     volumes:
       - /dev:/dev
       - /lib/firmware:/lib/firmware
+      - /tmp/.X11-unix:/tmp/.X11-unix
     # command: >
     #   oem7_file_name:=/dev/ttyUSB0 
     #   oem7_tty_baud:=115200
