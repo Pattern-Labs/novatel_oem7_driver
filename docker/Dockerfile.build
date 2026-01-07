@@ -24,5 +24,7 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 RUN echo "source /novatel_ros2/ros2_ws/install/setup.bash" >> ~/.bashrc
 
 ENTRYPOINT ["bash", "-c", "set -e \
-    && ros2 launch /novatel_ros2/ros2_ws/src/novatel_oem7_driver/launch/oem7_file.launch.py \
+    && source /opt/ros/${ROS_DISTRO}/setup.bash && \
+    source /novatel_ros2/ros2_ws/install/setup.bash && \
+    ros2 launch /novatel_ros2/ros2_ws/src/novatel_oem7_driver/launch/oem7_file.launch.py \
     oem7_file_name:=/dev/ttyUSB0"]
