@@ -13,6 +13,11 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y sudo vim nano curl socat python3-pip
 
 
+RUN apt-get update && apt-get install -y \
+    ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
+    ros-${ROS_DISTRO}-cyclonedds
+ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+
 WORKDIR /novatel_ros2/ros2_ws
 COPY src ros2_ws/src
 RUN rosdep update --include-eol-distros
