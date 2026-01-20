@@ -23,7 +23,7 @@ COPY src ros2_ws/src
 RUN rosdep update --include-eol-distros
 RUN rosdep install --from-paths ros2_ws/src/ -y --ignore-src
 
-RUN source /opt/ros/${ROS_DISTRO}/setup.bash && colcon build --base-paths ros2_ws/src/
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash && colcon build  --cmake-args -DCMAKE_BUILD_TYPE=Release --base-paths ros2_ws/src/
 
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 RUN echo "source /novatel_ros2/ros2_ws/install/setup.bash" >> ~/.bashrc
